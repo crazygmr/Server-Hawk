@@ -1,4 +1,4 @@
-module com.example.serverhawk {
+module ServerHawk {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -10,6 +10,6 @@ module com.example.serverhawk {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens com.example.serverhawk to javafx.fxml;
-    exports com.example.serverhawk;
+    opens ServerHawk to javafx.fxml;
+    exports ServerHawk;
 }
