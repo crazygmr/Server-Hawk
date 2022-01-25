@@ -1,5 +1,9 @@
 package ServerHawk;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,25 +11,27 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import oshi.SystemInfo;
-import oshi.hardware.CentralProcessor;
-import oshi.hardware.ComputerSystem;
-import oshi.software.os.OperatingSystem;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ServerHawkController implements Initializable {
+public class StorageController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
 
     @FXML
-    private Label bootTime;
+    private CategoryAxis Time;
+
+    @FXML
+    private LineChart<?, ?> UtilizationGraph;
 
     @FXML
     private Button cpuSelect;
@@ -34,19 +40,7 @@ public class ServerHawkController implements Initializable {
     private Button gpuSelect;
 
     @FXML
-    private Label hardwareInfo;
-
-    @FXML
-    private Button homeSelect;
-
-    @FXML
     private Button networkSelect;
-
-    @FXML
-    private Label osName;
-
-    @FXML
-    private Label processorInfo;
 
     @FXML
     private Button ramSelect;
@@ -55,8 +49,10 @@ public class ServerHawkController implements Initializable {
     private Button storageSelect;
 
     @FXML
-    private Label upTime;
+    private Button homeSelect;
 
+    @FXML
+    private NumberAxis totalUtilization;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

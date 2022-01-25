@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,101 +11,154 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane prefHeight="834.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHawk.ServerHawkController">
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <GridPane gridLinesVisible="true" layoutX="42.0" layoutY="195.0" prefHeight="365.0" prefWidth="325.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="14.0" prefHeight="38.0" prefWidth="104.0" text="Home">
+                    <font>
+                        <Font name="Times New Roman" size="24.0" />
+                    </font>
+                </Label>
+            <Label alignment="CENTER" layoutX="405.0" layoutY="71.0" prefHeight="51.0" prefWidth="295.0" text="OS and HW Information">
+               <font>
+                  <Font name="Times New Roman" size="24.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="85.0" layoutY="122.0" prefHeight="200.0" prefWidth="445.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
                <children>
-                  <Label text="Utilization" />
-                  <Label text="Clock Speed" GridPane.rowIndex="2" />
-                  <Label text="Temperature" GridPane.rowIndex="3" />
-                  <Label text="Cores" GridPane.rowIndex="4" />
-                  <Label text="Logical Processors" GridPane.rowIndex="5" />
-                  <Label text="Voltage" GridPane.rowIndex="6" />
-                  <Label text="Base Clock Speed" GridPane.rowIndex="1" />
-                  <Label text="L1 Cache" GridPane.rowIndex="7" />
-                  <Label text="L2 Cache" GridPane.rowIndex="8" />
-                  <Label text="L3 Cache" GridPane.rowIndex="9" />
+                  <Label alignment="CENTER" layoutX="151.0" layoutY="14.0" prefHeight="39.0" prefWidth="144.0" text="Operating System">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Label>
+                  <GridPane layoutX="123.0" layoutY="56.0" prefHeight="144.0" prefWidth="445.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER" prefHeight="39.0" prefWidth="144.0" text="Operating System">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="39.0" prefWidth="144.0" text="Booted:" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="39.0" prefWidth="144.0" text="Uptime:" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="osName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="&lt;OS Name&gt;" GridPane.columnIndex="1" />
+                        <Label fx:id="bootTime" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="&lt;Boot Time&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="upTime" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="&lt;System Uptime&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
                </children>
-            </GridPane>
-            <LineChart fx:id="UtilizationGraph" layoutX="394.0" layoutY="155.0" legendVisible="false" prefHeight="303.0" prefWidth="433.0" title="CPU Utilization" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="155.0">
-               <xAxis>
-                  <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
-               </xAxis>
-               <yAxis>
-                  <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
-               </yAxis>
-            </LineChart>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="14.0" prefHeight="38.0" prefWidth="104.0" text="CPU">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </center>
-   <top>
-      <GridPane gridLinesVisible="true" BorderPane.alignment="CENTER">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="495.0" minWidth="10.0" prefWidth="174.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1107.0" minWidth="10.0" prefWidth="1105.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <children>
-            <Label contentDisplay="CENTER" text="Server Hawk">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-               <padding>
-                  <Insets left="25.0" right="10.0" />
-               </padding>
-            </Label>
-            <Label prefHeight="28.0" prefWidth="273.0" text="&lt;System Name&gt;" GridPane.columnIndex="1">
-               <font>
-                  <Font name="Times New Roman" size="24.0" />
-               </font>
-               <padding>
-                  <Insets left="25.0" />
-               </padding>
-            </Label>
-         </children>
-      </GridPane>
-   </top>
-   <left>
-      <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER_LEFT">
-         <children>
-            <Button fx:id="cpuSelect" mnemonicParsing="false" onAction="#switchToCPU" text="CPU" />
-            <Button fx:id="gpuSelect" mnemonicParsing="false" onAction="#switchToGPU" text="GPU" />
-            <Button mnemonicParsing="false" text="RAM" />
-            <Button mnemonicParsing="false" text="HDD/SDD" />
-            <Button mnemonicParsing="false" text="Network" />
-         </children>
-         <BorderPane.margin>
-            <Insets top="8.0" />
-         </BorderPane.margin>
-      </VBox>
-   </left>
+            </AnchorPane>
+            <AnchorPane layoutX="85.0" layoutY="355.0" prefHeight="343.0" prefWidth="445.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                  <Label alignment="CENTER" layoutX="151.0" layoutY="14.0" prefHeight="39.0" prefWidth="144.0" text="Processor">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Label>
+                  <GridPane layoutX="123.0" layoutY="149.0" prefHeight="194.0" prefWidth="445.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="149.0">
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <Label fx:id="processorInfo" alignment="CENTER" layoutY="45.0" prefHeight="298.0" prefWidth="445.0" text="&lt;CPU Name&gt;&#10;&lt;Physical CPU Packages&gt;&#10;&lt;Physical CPU Cores&gt;&#10;&lt;Logical CPUs&gt;&#10;&lt;Identifier&gt;&#10;&lt;ProcessorID&gt;&#10;&lt;Microarchitecture&gt;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="600.0" layoutY="122.0" prefHeight="577.0" prefWidth="535.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                  <GridPane layoutX="168.0" layoutY="175.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="280.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="529.0" minHeight="10.0" prefHeight="516.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Hardware Information">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="hardwareInfo" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="&lt;Firmware Information&gt;&#10;&lt;Baseboard Information&gt;&#10;&lt;Model&gt;&#10;&lt;Manufacturer&gt;&#10;&lt;Serial Number&gt;&#10;&lt;HardwareUUID&gt;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="Times New Roman" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+            </children>
+        </AnchorPane>
+    </center>
+    <top>
+        <GridPane gridLinesVisible="true" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="495.0" minWidth="10.0" prefWidth="174.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1107.0" minWidth="10.0" prefWidth="1105.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <children>
+                <Label contentDisplay="CENTER" text="Server Hawk">
+                    <font>
+                        <Font name="Times New Roman" size="24.0" />
+                    </font>
+                    <padding>
+                        <Insets left="25.0" right="10.0" />
+                    </padding>
+                </Label>
+                <Label prefHeight="28.0" prefWidth="273.0" text="&lt;System Name&gt;" GridPane.columnIndex="1">
+                    <font>
+                        <Font name="Times New Roman" size="24.0" />
+                    </font>
+                    <padding>
+                        <Insets left="25.0" />
+                    </padding>
+                </Label>
+            </children>
+        </GridPane>
+    </top>
+    <left>
+        <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER_LEFT">
+            <children>
+                <Button fx:id="homeSelect" mnemonicParsing="false" onAction="#switchToHome" text="Home" />
+                <Button fx:id="cpuSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToCPU" text="CPU" />
+                <Button fx:id="gpuSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToGPU" text="GPU" />
+                <Button fx:id="ramSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToRAM" text="RAM" />
+                <Button fx:id="storageSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToStorage" text="HDD/SDD" />
+                <Button fx:id="networkSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToNetwork" text="Network" />
+            </children>
+            <BorderPane.margin>
+                <Insets top="8.0" />
+            </BorderPane.margin>
+        </VBox>
+    </left>
 </BorderPane>

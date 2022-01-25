@@ -9,6 +9,7 @@ module ServerHawk {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires com.github.oshi;
 
     opens ServerHawk to javafx.fxml;
     exports ServerHawk;

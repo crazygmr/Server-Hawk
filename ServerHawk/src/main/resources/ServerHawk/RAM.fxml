@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="834.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHawk.GPUController">
+<BorderPane prefHeight="834.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHawk.RAMController">
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -28,23 +28,25 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label text="Utilization" />
-                        <Label text="Temperature" GridPane.rowIndex="1" />
-                        <Label text="Driver Version" GridPane.rowIndex="2" />
-                        <Label text="Driver Date" GridPane.rowIndex="3" />
-                        <Label text="Dedicated GPU Memory" GridPane.rowIndex="5" />
-                        <Label text="GPU Memory" GridPane.rowIndex="6" />
-                        <Label text="Shared GPU Memory" GridPane.rowIndex="7" />
-                  <Label text="Physical Location" GridPane.rowIndex="4" />
+                        <Label text="Committed Memory" GridPane.rowIndex="3" />
+                        <Label text="Paged Memory" GridPane.rowIndex="4" />
+                        <Label text="Non-Paged Memory" GridPane.rowIndex="5" />
+                        <Label text="Slots Used" GridPane.rowIndex="6" />
+                        <Label text="Voltage" GridPane.rowIndex="2" />
+                        <Label text="Form Factor" GridPane.rowIndex="1" />
+                        <Label text="Compressed Memory" GridPane.rowIndex="7" />
+                        <Label text="Available Memory" GridPane.rowIndex="8" />
                     </children>
                 </GridPane>
-                <LineChart fx:id="UtilizationGraph" layoutX="394.0" layoutY="155.0" legendVisible="false" prefHeight="303.0" prefWidth="433.0" title="GPU Utilization" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="155.0">
+                <LineChart fx:id="UtilizationGraph" layoutX="394.0" layoutY="155.0" legendVisible="false" prefHeight="303.0" prefWidth="433.0" title="CPU Utilization" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="155.0">
                     <xAxis>
                         <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
                     </xAxis>
@@ -52,7 +54,7 @@
                         <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
                     </yAxis>
                 </LineChart>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="14.0" prefHeight="38.0" prefWidth="104.0" text="GPU">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="14.0" prefHeight="38.0" prefWidth="104.0" text="RAM">
                     <font>
                         <Font name="Times New Roman" size="24.0" />
                     </font>
@@ -95,10 +97,10 @@
     <left>
         <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="8.0" BorderPane.alignment="CENTER_LEFT">
             <children>
-            <Button fx:id="homeSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToHome" text="Home" />
+                <Button fx:id="homeSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToHome" text="Home" />
                 <Button fx:id="cpuSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToCPU" text="CPU" />
-                <Button fx:id="gpuSelect" mnemonicParsing="false" onAction="#switchToGPU" text="GPU" />
-                <Button fx:id="ramSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToRAM" text="RAM" />
+                <Button fx:id="gpuSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToGPU" text="GPU" />
+                <Button fx:id="ramSelect" mnemonicParsing="false" onAction="#switchToRAM" text="RAM" />
                 <Button fx:id="storageSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToStorage" text="HDD/SDD" />
                 <Button fx:id="networkSelect" focusTraversable="false" mnemonicParsing="false" onAction="#switchToNetwork" text="Network" />
             </children>
