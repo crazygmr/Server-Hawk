@@ -16,37 +16,124 @@
 
 <BorderPane prefHeight="834.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHawk.NetworkController">
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
             <children>
-                <GridPane gridLinesVisible="true" layoutX="42.0" layoutY="195.0" prefHeight="365.0" prefWidth="325.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <Label text="Connection Type" />
-                        <Label text="IPv6 Address" GridPane.rowIndex="2" />
-                        <Label text="IPv4 Address" GridPane.rowIndex="1" />
-                    </children>
-                </GridPane>
-                <LineChart fx:id="UtilizationGraph" layoutX="394.0" layoutY="155.0" legendVisible="false" prefHeight="303.0" prefWidth="433.0" title="Throughput" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="155.0">
-                    <xAxis>
-                        <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
-                    </xAxis>
-                    <yAxis>
-                        <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
-                    </yAxis>
-                </LineChart>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="14.0" prefHeight="38.0" prefWidth="104.0" text="Network">
                     <font>
                         <Font name="Times New Roman" size="24.0" />
                     </font>
                 </Label>
+            <AnchorPane layoutX="49.0" layoutY="178.0" prefHeight="400.0" prefWidth="345.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                      <GridPane gridLinesVisible="true" layoutX="-46.0" layoutY="-79.0" prefHeight="286.0" prefWidth="279.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                          <children>
+                              <Label text="Connection Type">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="IPv6 Address" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                              <Label text="IPv4 Address" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="network_Connection_Type" layoutX="10.0" layoutY="39.0" text="&lt;Connection Type&gt;" GridPane.columnIndex="1">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="network_IP4_Address" layoutX="10.0" layoutY="117.0" text="&lt;IPv4 Address&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="network_IP6_Address" layoutX="10.0" layoutY="195.0" text="&lt;IPv6 Address&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="195.0" text="Send" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="39.0" text="Recieve" GridPane.rowIndex="4">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="network_Send" layoutX="10.0" layoutY="273.0" text="&lt;Send&gt;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="network_Recieve" layoutX="10.0" layoutY="350.0" text="&lt;Recieve&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                          </children>
+                      </GridPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="426.0" layoutY="163.0" prefHeight="430.0" prefWidth="730.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                      <LineChart fx:id="UtilizationGraph" layoutX="-272.0" layoutY="-85.0" legendVisible="false" prefHeight="509.0" prefWidth="635.0" title="Throughput" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <xAxis>
+                              <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
+                          </xAxis>
+                          <yAxis>
+                              <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
+                          </yAxis>
+                      </LineChart>
+               </children>
+            </AnchorPane>
             </children>
         </AnchorPane>
     </center>

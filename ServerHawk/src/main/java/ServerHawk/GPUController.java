@@ -1,9 +1,5 @@
 package ServerHawk;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +11,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,6 +36,36 @@ public class GPUController implements Initializable {
     private Button gpuSelect;
 
     @FXML
+    private Label gpu_Dedicated_Memory;
+
+    @FXML
+    private Label gpu_Driver_Date;
+
+    @FXML
+    private Label gpu_Driver_Version;
+
+    @FXML
+    private Label gpu_Make_Model;
+
+    @FXML
+    private Label gpu_Memory;
+
+    @FXML
+    private Label gpu_Physical_Location;
+
+    @FXML
+    private Label gpu_Shared_Memory;
+
+    @FXML
+    private Label gpu_Temperature;
+
+    @FXML
+    private Label gpu_Utilization;
+
+    @FXML
+    private Button homeSelect;
+
+    @FXML
     private Button networkSelect;
 
     @FXML
@@ -47,9 +73,6 @@ public class GPUController implements Initializable {
 
     @FXML
     private Button storageSelect;
-
-    @FXML
-    private Button homeSelect;
 
     @FXML
     private NumberAxis totalUtilization;

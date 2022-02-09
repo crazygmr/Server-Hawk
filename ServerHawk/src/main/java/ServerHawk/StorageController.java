@@ -1,9 +1,5 @@
 package ServerHawk;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +11,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,7 +33,34 @@ public class StorageController implements Initializable {
     private Button cpuSelect;
 
     @FXML
+    private Label disk_Active_Time;
+
+    @FXML
+    private Label disk_Average_Response_Time;
+
+    @FXML
+    private Label disk_Capacity_Formatted;
+
+    @FXML
+    private Label disk_Letter;
+
+    @FXML
+    private Label disk_Make_Model;
+
+    @FXML
+    private Label disk_Number;
+
+    @FXML
+    private Label disk_Read_Write_Speed;
+
+    @FXML
+    private Label disk_Type;
+
+    @FXML
     private Button gpuSelect;
+
+    @FXML
+    private Button homeSelect;
 
     @FXML
     private Button networkSelect;
@@ -47,9 +70,6 @@ public class StorageController implements Initializable {
 
     @FXML
     private Button storageSelect;
-
-    @FXML
-    private Button homeSelect;
 
     @FXML
     private NumberAxis totalUtilization;

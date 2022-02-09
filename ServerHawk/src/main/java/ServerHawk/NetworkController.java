@@ -1,10 +1,8 @@
 package ServerHawk;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,8 +13,9 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,16 +39,31 @@ public class NetworkController implements Initializable {
     private Button gpuSelect;
 
     @FXML
+    private Button homeSelect;
+
+    @FXML
     private Button networkSelect;
+
+    @FXML
+    private Label network_Connection_Type;
+
+    @FXML
+    private Label network_IP4_Address;
+
+    @FXML
+    private Label network_IP6_Address;
+
+    @FXML
+    private Label network_Recieve;
+
+    @FXML
+    private Label network_Send;
 
     @FXML
     private Button ramSelect;
 
     @FXML
     private Button storageSelect;
-
-    @FXML
-    private Button homeSelect;
 
     @FXML
     private NumberAxis totalUtilization;

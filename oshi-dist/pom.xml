@@ -23,7 +23,7 @@
         <automatic.module.name>com.github.oshi.dist</automatic.module.name>
     </properties>
 
-    <!-- NOTE: These dependency declarations are only required to sort this project 
+    <!-- NOTE: These dependency declarations are only required to sort this project
         to the end of the line in the multimodule build. -->
     <dependencies>
         <dependency>
@@ -35,6 +35,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>oshi-demo</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

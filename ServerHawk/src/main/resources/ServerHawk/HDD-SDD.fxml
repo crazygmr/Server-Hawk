@@ -16,50 +16,163 @@
 
 <BorderPane prefHeight="834.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHawk.StorageController">
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
             <children>
-                <GridPane gridLinesVisible="true" layoutX="42.0" layoutY="195.0" prefHeight="365.0" prefWidth="325.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <Label text="Disk Number" />
-                        <Label text="Active Time" GridPane.rowIndex="2" />
-                        <Label text="Average Response Time" GridPane.rowIndex="3" />
-                        <Label text="Read/Write Speed" GridPane.rowIndex="4" />
-                        <Label text="Capacity/Formatted" GridPane.rowIndex="5" />
-                        <Label text="Disk Type" GridPane.rowIndex="6" />
-                        <Label text="Disk Letter" GridPane.rowIndex="1" />
-                    </children>
-                </GridPane>
-                <LineChart fx:id="UtilizationGraph" layoutX="394.0" layoutY="155.0" legendVisible="false" prefHeight="303.0" prefWidth="433.0" title="Active Time" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="155.0">
-                    <xAxis>
-                        <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
-                    </xAxis>
-                    <yAxis>
-                        <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
-                    </yAxis>
-                </LineChart>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="14.0" prefHeight="38.0" prefWidth="104.0" text="Storage">
                     <font>
                         <Font name="Times New Roman" size="24.0" />
                     </font>
                 </Label>
-            <Label layoutX="42.0" layoutY="147.0" prefHeight="34.0" prefWidth="185.0" text="&lt;Disk Make/Model&gt;">
+            <Label fx:id="disk_Make_Model" layoutX="42.0" layoutY="147.0" prefHeight="34.0" prefWidth="185.0" text="&lt;Disk Make/Model&gt;">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
+            <AnchorPane layoutX="49.0" layoutY="178.0" prefHeight="400.0" prefWidth="345.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                      <GridPane gridLinesVisible="true" layoutX="-48.0" layoutY="-61.0" prefHeight="304.0" prefWidth="277.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                          <children>
+                              <Label text="Disk Number">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Active Time" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Average Response Time" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="14.0" />
+                           </font>
+                        </Label>
+                              <Label text="Read/Write Speed" GridPane.rowIndex="4">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Capacity/Formatted" GridPane.rowIndex="5">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Disk Type" GridPane.rowIndex="6">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Disk Letter" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="disk_Number" layoutX="10.0" layoutY="28.0" text="&lt;Disk Number&gt;" GridPane.columnIndex="1">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="disk_Letter" layoutX="10.0" layoutY="84.0" text="&lt;Disk Letter&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="disk_Active_Time" layoutX="10.0" layoutY="140.0" text="&lt;Active Time&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="disk_Average_Response_Time" layoutX="10.0" layoutY="198.0" text="&lt;Average Response Time&gt;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="disk_Read_Write_Speed" layoutX="10.0" layoutY="251.0" text="&lt;Read/Write Speed&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="disk_Capacity_Formatted" layoutX="10.0" layoutY="306.0" text="&lt;Capacity/Formatted&gt;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="disk_Type" layoutX="10.0" layoutY="361.0" text="&lt;Disk Type&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                          </children>
+                      </GridPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="426.0" layoutY="163.0" prefHeight="430.0" prefWidth="730.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                      <LineChart fx:id="UtilizationGraph" layoutX="-289.0" layoutY="-91.0" legendVisible="false" prefHeight="509.0" prefWidth="635.0" title="Active Time" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <xAxis>
+                              <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
+                          </xAxis>
+                          <yAxis>
+                              <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
+                          </yAxis>
+                      </LineChart>
+               </children>
+            </AnchorPane>
             </children>
         </AnchorPane>
     </center>

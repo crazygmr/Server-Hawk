@@ -16,52 +16,212 @@
 
 <BorderPane prefHeight="834.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHawk.CPUController">
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
             <children>
-                <GridPane gridLinesVisible="true" layoutX="42.0" layoutY="195.0" prefHeight="365.0" prefWidth="325.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <Label text="Utilization" />
-                        <Label text="Clock Speed" GridPane.rowIndex="2" />
-                        <Label text="Temperature" GridPane.rowIndex="3" />
-                        <Label text="Cores" GridPane.rowIndex="4" />
-                        <Label text="Logical Processors" GridPane.rowIndex="5" />
-                        <Label text="Voltage" GridPane.rowIndex="6" />
-                        <Label text="Base Clock Speed" GridPane.rowIndex="1" />
-                        <Label text="L1 Cache" GridPane.rowIndex="7" />
-                        <Label text="L2 Cache" GridPane.rowIndex="8" />
-                        <Label text="L3 Cache" GridPane.rowIndex="9" />
-                  <Label fx:id="cpu_Util" GridPane.columnIndex="1" />
-                    </children>
-                </GridPane>
-                <LineChart fx:id="UtilizationGraph" layoutX="394.0" layoutY="155.0" legendVisible="false" prefHeight="303.0" prefWidth="433.0" title="CPU Utilization" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="155.0">
-                    <xAxis>
-                        <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
-                    </xAxis>
-                    <yAxis>
-                        <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
-                    </yAxis>
-                </LineChart>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="14.0" prefHeight="38.0" prefWidth="104.0" text="CPU">
                     <font>
                         <Font name="Times New Roman" size="24.0" />
                     </font>
                 </Label>
+            <AnchorPane layoutX="49.0" layoutY="178.0" minWidth="-Infinity" prefHeight="400.0" prefWidth="345.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: white;">
+               <children>
+                      <GridPane gridLinesVisible="true" layoutX="3.0" layoutY="3.0" prefHeight="400.0" prefWidth="345.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                          <children>
+                              <Label text="Utilization">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Clock Speed" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Temperature" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Cores" GridPane.rowIndex="4">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Logical Processors" GridPane.rowIndex="5">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Voltage" GridPane.rowIndex="6">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Base Clock Speed" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="L1 Cache" GridPane.rowIndex="7">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="L2 Cache" GridPane.rowIndex="8">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="L3 Cache" GridPane.rowIndex="9">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="cpu_Util" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Utilization %&gt;" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="cpu_Base_Clock_Speed" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Base Clock Speed&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="cpu_Clock_Speed" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Clock Speed&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="cpu_Temperature" layoutX="177.0" layoutY="88.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Temperature&gt;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="cpu_Cores" layoutX="177.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;# of Cores&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="cpu_Logical_Processors" layoutX="177.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;# of Logical Processors&gt;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="cpu_Voltage" layoutX="177.0" layoutY="205.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Voltage&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="cpu_L1_Cache" layoutX="177.0" layoutY="205.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;L1 Cache&gt;" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="cpu_L2_Cache" layoutX="177.0" layoutY="205.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;L2 Cache&gt;" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="cpu_L3_Cache" layoutX="177.0" layoutY="283.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;L3 Cache&gt;" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                        </Label>
+                          </children>
+                      </GridPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="426.0" layoutY="163.0" minHeight="-Infinity" prefHeight="430.0" prefWidth="730.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: white;">
+               <children>
+                      <LineChart fx:id="UtilizationGraph" layoutX="-54.0" layoutY="54.0" title="CPU Utilization" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <xAxis>
+                              <CategoryAxis fx:id="Time" animated="false" autoRanging="false" label="Time" />
+                          </xAxis>
+                          <yAxis>
+                              <NumberAxis fx:id="totalUtilization" animated="false" autoRanging="false" label="Utilization %" side="LEFT" />
+                          </yAxis>
+                      </LineChart>
+               </children>
+            </AnchorPane>
             </children>
         </AnchorPane>
     </center>
@@ -86,7 +246,7 @@
                         <Insets left="25.0" right="10.0" />
                     </padding>
                 </Label>
-                <Label prefHeight="28.0" prefWidth="273.0" text="&lt;System Name&gt;" GridPane.columnIndex="1">
+                <Label fx:id="systemName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;System Name&gt;" GridPane.columnIndex="1">
                     <font>
                         <Font name="Times New Roman" size="24.0" />
                     </font>

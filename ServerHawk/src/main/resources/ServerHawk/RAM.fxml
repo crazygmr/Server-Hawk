@@ -16,49 +16,192 @@
 
 <BorderPane prefHeight="834.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHawk.RAMController">
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
             <children>
-                <GridPane gridLinesVisible="true" layoutX="42.0" layoutY="195.0" prefHeight="365.0" prefWidth="325.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <Label text="Utilization" />
-                        <Label text="Committed Memory" GridPane.rowIndex="3" />
-                        <Label text="Paged Memory" GridPane.rowIndex="4" />
-                        <Label text="Non-Paged Memory" GridPane.rowIndex="5" />
-                        <Label text="Slots Used" GridPane.rowIndex="6" />
-                        <Label text="Voltage" GridPane.rowIndex="2" />
-                        <Label text="Form Factor" GridPane.rowIndex="1" />
-                        <Label text="Compressed Memory" GridPane.rowIndex="7" />
-                        <Label text="Available Memory" GridPane.rowIndex="8" />
-                    </children>
-                </GridPane>
-                <LineChart fx:id="UtilizationGraph" layoutX="394.0" layoutY="155.0" legendVisible="false" prefHeight="303.0" prefWidth="433.0" title="CPU Utilization" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="155.0">
-                    <xAxis>
-                        <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
-                    </xAxis>
-                    <yAxis>
-                        <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
-                    </yAxis>
-                </LineChart>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="14.0" prefHeight="38.0" prefWidth="104.0" text="RAM">
                     <font>
                         <Font name="Times New Roman" size="24.0" />
                     </font>
                 </Label>
+            <AnchorPane layoutX="49.0" layoutY="178.0" prefHeight="400.0" prefWidth="345.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
+               <children>
+                      <GridPane gridLinesVisible="true" layoutX="-83.0" layoutY="-49.0" prefHeight="316.0" prefWidth="242.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                          <children>
+                              <Label text="Utilization">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Committed Memory" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Paged Memory" GridPane.rowIndex="4">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Non-Paged Memory" GridPane.rowIndex="5">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Slots Used" GridPane.rowIndex="6">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Voltage" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Form Factor" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Compressed Memory" GridPane.rowIndex="7">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Available Memory" GridPane.rowIndex="8">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Utilization" layoutX="10.0" layoutY="22.0" text="&lt;Utilization&gt;" GridPane.columnIndex="1">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Form_Factor" layoutX="10.0" layoutY="66.0" text="&lt;Form Factor&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Voltage" layoutX="10.0" layoutY="109.0" text="&lt;Voltage&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Committed_Memory" layoutX="10.0" layoutY="152.0" text="&lt;Committed Mem&gt;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Paged_Memory" layoutX="10.0" layoutY="195.0" text="&lt;Paged Memory&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Non_Paged_Memory" layoutX="10.0" layoutY="238.0" text="&lt;Non-Paged Mem&gt;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Slots_Used" layoutX="10.0" layoutY="281.0" text="&lt;Slots Used&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Compressed_Memory" layoutX="10.0" layoutY="324.0" text="&lt;Compressed Mem&gt;" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Available_Memory" layoutX="10.0" layoutY="367.0" text="&lt;Available Memory&gt;" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                          </children>
+                      </GridPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="426.0" layoutY="163.0" prefHeight="430.0" prefWidth="730.0">
+               <children>
+                      <LineChart fx:id="UtilizationGraph" layoutX="426.0" layoutY="163.0" legendVisible="false" prefHeight="509.0" prefWidth="635.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" title="RAM Utilization" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <xAxis>
+                              <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
+                          </xAxis>
+                          <yAxis>
+                              <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
+                          </yAxis>
+                      </LineChart>
+               </children>
+            </AnchorPane>
             </children>
         </AnchorPane>
     </center>

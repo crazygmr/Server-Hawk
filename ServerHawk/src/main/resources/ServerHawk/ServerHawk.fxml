@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="834.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHawk.ServerHawkController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="834.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHawk.ServerHawkController">
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgrey; -fx-opacity: 10;" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="14.0" prefHeight="38.0" prefWidth="104.0" text="Home">
                     <font>
@@ -25,7 +25,7 @@
                   <Font name="Times New Roman" size="24.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="85.0" layoutY="122.0" prefHeight="200.0" prefWidth="445.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
+            <AnchorPane layoutX="85.0" layoutY="122.0" prefHeight="200.0" prefWidth="490.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
                <children>
                   <Label alignment="CENTER" layoutX="151.0" layoutY="14.0" prefHeight="39.0" prefWidth="144.0" text="Operating System">
                      <font>
@@ -34,8 +34,8 @@
                   </Label>
                   <GridPane layoutX="123.0" layoutY="56.0" prefHeight="144.0" prefWidth="445.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="215.0" minWidth="10.0" prefWidth="150.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="332.0" minWidth="10.0" prefWidth="332.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -58,14 +58,23 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="osName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="&lt;OS Name&gt;" GridPane.columnIndex="1" />
-                        <Label fx:id="bootTime" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="&lt;Boot Time&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="upTime" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="&lt;System Uptime&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="osName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="&lt;OS Name&gt;" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font></Label>
+                        <Label fx:id="bootTime" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="46.0" prefWidth="305.0" text="&lt;Boot Time&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font></Label>
+                        <Label fx:id="upTime" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="&lt;System Uptime&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font></Label>
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="85.0" layoutY="355.0" prefHeight="343.0" prefWidth="445.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
+            <AnchorPane layoutX="85.0" layoutY="355.0" prefHeight="343.0" prefWidth="490.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
                <children>
                   <Label alignment="CENTER" layoutX="151.0" layoutY="14.0" prefHeight="39.0" prefWidth="144.0" text="Processor">
                      <font>
@@ -135,7 +144,7 @@
                         <Insets left="25.0" right="10.0" />
                     </padding>
                 </Label>
-                <Label prefHeight="28.0" prefWidth="273.0" text="&lt;System Name&gt;" GridPane.columnIndex="1">
+                <Label fx:id="systemName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;System Name&gt;" GridPane.columnIndex="1">
                     <font>
                         <Font name="Times New Roman" size="24.0" />
                     </font>
