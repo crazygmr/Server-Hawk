@@ -185,9 +185,9 @@
                       </LineChart>
                </children>
             </AnchorPane>
-            <Label fx:id="gpu_Make_Model" alignment="CENTER" layoutX="327.0" layoutY="60.0" prefHeight="46.0" prefWidth="450.0" text="&lt;GPU Make/Model&gt;">
+            <Label fx:id="gpu_Make_Model" alignment="CENTER" layoutX="260.0" layoutY="52.0" prefHeight="75.0" prefWidth="585.0" text="&lt;GPU Make/Model&gt;">
                <font>
-                  <Font name="Times New Roman" size="18.0" />
+                  <Font name="Times New Roman" size="26.0" />
                </font>
             </Label>
             </children>
@@ -214,7 +214,7 @@
                         <Insets left="25.0" right="10.0" />
                     </padding>
                 </Label>
-                <Label prefHeight="28.0" prefWidth="273.0" text="&lt;System Name&gt;" GridPane.columnIndex="1">
+                <Label fx:id="systemName" prefHeight="28.0" prefWidth="273.0" text="&lt;System Name&gt;" GridPane.columnIndex="1">
                     <font>
                         <Font name="Times New Roman" size="24.0" />
                     </font>

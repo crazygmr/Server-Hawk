@@ -214,10 +214,10 @@
                <children>
                       <LineChart fx:id="UtilizationGraph" layoutX="-54.0" layoutY="54.0" title="CPU Utilization" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <xAxis>
-                              <CategoryAxis fx:id="Time" animated="false" autoRanging="false" label="Time" />
+                              <CategoryAxis fx:id="Time" animated="false" label="Time" />
                           </xAxis>
                           <yAxis>
-                              <NumberAxis fx:id="totalUtilization" animated="false" autoRanging="false" label="Utilization %" side="LEFT" />
+                              <NumberAxis fx:id="totalUtilization" animated="false" label="Utilization %" side="LEFT" />
                           </yAxis>
                       </LineChart>
                </children>

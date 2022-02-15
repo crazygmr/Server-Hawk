@@ -84,21 +84,10 @@ public class ServerHawkController implements Initializable {
         bootTime.setText(String.valueOf(Instant.ofEpochSecond(os.getSystemBootTime())));
         // Sets the text to the uptime of the system since last boot in the format X Days, hh:mm:ss
         upTime.setText(FormatUtil.formatElapsedSecs(os.getSystemUptime()));
-
-        // A timer that serves to update the uptime label every second
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() { // A timer task to update the seconds of the uptime label
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    public void run() {
-                        upTime.setText(FormatUtil.formatElapsedSecs(os.getSystemUptime()));
-                    }
-                });
-            }
-        }, 1000, 1000); // Refresh every 1 second
         // Sets the text to the name of the host systems operating systems
         osName.setText(String.valueOf(os));
+
+        startTimer(hal, os);
 
         processorInfo.setText(hal.getProcessor().toString());
 
@@ -173,5 +162,20 @@ public class ServerHawkController implements Initializable {
             }
         }
         return "DefaultValue";
+    }
+
+    void startTimer (HardwareAbstractionLayer hal, OperatingSystem os) {
+        // A timer that serves to update the uptime label every second
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() { // A timer task to update the seconds of the uptime label
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        upTime.setText(FormatUtil.formatElapsedSecs(os.getSystemUptime()));
+                    }
+                });
+            }
+        }, 1000, 1000); // Refresh every 1 second
     }
 }

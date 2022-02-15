@@ -22,11 +22,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import oshi.SystemInfo;
+import oshi.hardware.CentralProcessor;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
 import oshi.util.Util;
+import oshi.hardware.platform.windows.WindowsHardwareAbstractionLayer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +44,9 @@ public class CPUController implements Initializable {
     private Scene scene;
     private Parent root;
     //private ScheduledExecutorService scheduledExecutorService;
+    private long[] oldTicks;
+    private long[] logicalProcessors;
+    private long averageFreq;
 
     @FXML
     private CategoryAxis Time;
@@ -108,22 +113,32 @@ public class CPUController implements Initializable {
         SystemInfo systemInfo = new SystemInfo();
         OperatingSystem os = systemInfo.getOperatingSystem();
         HardwareAbstractionLayer hal = systemInfo.getHardware();
+        oldTicks = new long[CentralProcessor.TickType.values().length];
 
-        cpu_Util.setText(String.valueOf(hal.getProcessor().getMaxFreq()));
+        /*long [] prevTicks = hal.getProcessor().getSystemCpuLoadTicks();
+        cpu_Util.setText(String.format("%.1f%%", hal.getProcessor().getSystemCpuLoadBetweenTicks(prevTicks) * 100));*/
+
         systemName.setText("System Name: " + getSystemName(os));
         cpu_Base_Clock_Speed.setText(FormatUtil.formatValue(hal.getProcessor().getMaxFreq(), "hz"));
 
-        long[] logicalProcessors = hal.getProcessor().getCurrentFreq();
-        long averageFreq = Arrays.stream(logicalProcessors).sum() / logicalProcessors.length;
+        cpu_Util.setText(String.format("%.1f%%", cpuData(hal.getProcessor()) * 100));
+
+        cpuAverageFreq(hal.getProcessor());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Data Series");
+        series.setName("% Utilization");
         UtilizationGraph.getData().add(series);
+
+        cpu_Logical_Processors.setText(String.valueOf(hal.getProcessor().getLogicalProcessorCount()));
+
+        cpu_Cores.setText(String.valueOf(hal.getProcessor().getPhysicalProcessorCount()));
 
         cpu_Clock_Speed.setText(FormatUtil.formatValue(averageFreq, "hz"));
 
-        cpu_Temperature.setText(String.valueOf(hal.getSensors().getCpuTemperature()));
+        // Sets the text of the cpu_Temperature label to the current temperature of the CPU
+        cpu_Temperature.setText(String.format("%.1f C", hal.getSensors().getCpuTemperature()));
+        // Sets the text of the cpu_Voltage label to the current temperature of the CPU
         cpu_Voltage.setText(String.valueOf(hal.getSensors().getCpuVoltage()));
 
         // A timer that serves to update the uptime label every second
@@ -133,14 +148,20 @@ public class CPUController implements Initializable {
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
-                        //upTime.setText(FormatUtil.formatElapsedSecs(os.getSystemUptime()));
-                        long[] logicalProcessors = hal.getProcessor().getCurrentFreq();
-                        long averageFreq = Arrays.stream(logicalProcessors).sum() / logicalProcessors.length;
+                        CentralProcessor processor = hal.getProcessor();
 
-                        cpu_Clock_Speed.setText(FormatUtil.formatValue(averageFreq, "hz"));
+                        cpu_Clock_Speed.setText(FormatUtil.formatValue(cpuAverageFreq(processor), "hz"));
+                        cpu_Temperature.setText(String.format("%.1f C", hal.getSensors().getCpuTemperature()));
+                        cpu_Voltage.setText(String.valueOf(hal.getSensors().getCpuVoltage()));
+
+                        cpu_Util.setText(String.format("%.2f%%", cpuData(processor) * 100));
 
                         Date currentTime = new Date();
-                        series.getData().add(new XYChart.Data<>("Hi", 50));
+                        series.getData().add(new XYChart.Data<>(simpleDateFormat.format(currentTime), (hal.getSensors().getCpuTemperature())));
+
+                        if (series.getData().size() > 15) {
+                            series.getData().remove(0);
+                        }
                     }
                 });
             }
@@ -207,5 +228,21 @@ public class CPUController implements Initializable {
             }
         }
         return "DefaultValue";
+    }
+
+    private double cpuData(CentralProcessor proc) {
+        double d = proc.getSystemCpuLoadBetweenTicks(oldTicks);
+        oldTicks = proc.getSystemCpuLoadTicks();
+        return d;
+    }
+
+    private long cpuAverageFreq(CentralProcessor processor) {
+        logicalProcessors = processor.getCurrentFreq();
+        averageFreq = 0;
+        for(long freq : logicalProcessors) {
+            averageFreq += freq;
+        }
+        averageFreq /= logicalProcessors.length;
+        return averageFreq;
     }
 }

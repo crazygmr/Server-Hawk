@@ -13,9 +13,14 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import oshi.SystemInfo;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OSProcess;
+import oshi.software.os.OperatingSystem;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class GPUController implements Initializable {
@@ -34,6 +39,9 @@ public class GPUController implements Initializable {
 
     @FXML
     private Button gpuSelect;
+
+    @FXML
+    private Label systemName;
 
     @FXML
     private Label gpu_Dedicated_Memory;
@@ -79,7 +87,13 @@ public class GPUController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        SystemInfo systemInfo = new SystemInfo();
+        HardwareAbstractionLayer hal = systemInfo.getHardware();
+        OperatingSystem os = systemInfo.getOperatingSystem();
 
+        systemName.setText("System Name: " + getSystemName(os));
+
+        gpu_Make_Model.setText(hal.getGraphicsCards().get(0).getName());
     }
 
     public void switchToCPU (ActionEvent event) throws IOException {
@@ -132,5 +146,15 @@ public class GPUController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public String getSystemName(OperatingSystem os) {
+        OSProcess process = os.getProcess(os.getProcessId());
+        for (Map.Entry<String, String> e : process.getEnvironmentVariables().entrySet()) {
+            if(e.getKey().equals("COMPUTERNAME")) {
+                return e.getValue();
+            }
+        }
+        return "DefaultValue";
     }
 }
