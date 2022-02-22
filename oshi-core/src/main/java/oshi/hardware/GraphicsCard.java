@@ -69,4 +69,20 @@ public interface GraphicsCard {
      * @return Total number of bytes.
      */
     long getVRam();
+
+    /**
+     * Retrieves the Maximum clock speed in Hz of the GPU from the OpenHardware Monitor API
+     * @return Maximum Clock Speed in Hertz
+     */
+    float getMaxFreq();
+
+    float getCurrentFreq();
+
+    float getTemp();
+
+    float getUtil();
+
+    float getFreeMem();
+
+    float getUsedMem();
 }

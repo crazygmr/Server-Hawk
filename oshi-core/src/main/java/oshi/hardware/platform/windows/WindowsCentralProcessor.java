@@ -23,11 +23,9 @@
  */
 package oshi.hardware.platform.windows;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.sun.jna.platform.win32.COM.COMException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,12 +47,15 @@ import oshi.driver.windows.perfmon.ProcessorInformation.ProcessorFrequencyProper
 import oshi.driver.windows.perfmon.ProcessorInformation.ProcessorTickCountProperty;
 import oshi.driver.windows.perfmon.SystemInformation;
 import oshi.driver.windows.perfmon.SystemInformation.ContextSwitchProperty;
+import oshi.driver.windows.wmi.OhmHardware;
+import oshi.driver.windows.wmi.OhmSensor;
 import oshi.driver.windows.wmi.Win32Processor;
 import oshi.driver.windows.wmi.Win32Processor.ProcessorIdProperty;
 import oshi.hardware.common.AbstractCentralProcessor;
 import oshi.jna.platform.windows.PowrProf;
 import oshi.jna.platform.windows.PowrProf.ProcessorPowerInformation;
 import oshi.util.ParseUtil;
+import oshi.util.platform.windows.WmiQueryHandler;
 import oshi.util.platform.windows.WmiUtil;
 import oshi.util.tuples.Pair;
 
@@ -331,4 +332,60 @@ final class WindowsCentralProcessor extends AbstractCentralProcessor {
     public long queryInterrupts() {
         return ProcessorInformation.queryInterruptCounters().getOrDefault(InterruptsProperty.INTERRUPTSPERSEC, 0L);
     }
+
+    /******************************************************************************************************************
+     *
+     *
+     *
+     ******************************************************************************************************************/
+
+    private static final String COM_EXCEPTION_MSG = "COM exception: {}";
+
+    @Override
+    public float queryUtilization() {
+        return getUtilizationFromOHM();
+    }
+
+    public static float getUtilizationFromOHM() {
+        WmiQueryHandler h = Objects.requireNonNull(WmiQueryHandler.createInstance());
+        boolean comInit = false;
+        try {
+            comInit = h.initCOM();
+            WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "CPU");
+            if (ohmHardware.getResultCount() > 0) {
+                LOG.debug("Found Utilization data in Open Hardware Monitor");
+                // Look for identifier containing "gpu"
+                String cpuIdentifier = null;
+                for (int i = 0; i < ohmHardware.getResultCount(); i++) {
+                    String id = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, i);
+                    if (id.toLowerCase().contains("cpu")) {
+                        cpuIdentifier = id;
+                        break;
+                    }
+                }
+                // If none found, just get the first one
+                if (cpuIdentifier == null) {
+                    cpuIdentifier = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, 1);
+                }
+                // Now fetch sensor
+                WmiResult<OhmSensor.ValueProperty> ohmSensors = OhmSensor.querySensorValue(h, cpuIdentifier, "Load");
+                if (ohmSensors.getResultCount() > 0) {
+                    return WmiUtil.getFloat(ohmSensors, OhmSensor.ValueProperty.VALUE,4);
+                }
+            }
+        } catch (COMException e) {
+            LOG.warn(COM_EXCEPTION_MSG, e.getMessage());
+        } finally {
+            if (comInit) {
+                h.unInitCOM();
+            }
+        }
+        return 0;
+    }
+
+    /******************************************************************************************************************
+     *
+     *
+     *
+     ******************************************************************************************************************/
 }

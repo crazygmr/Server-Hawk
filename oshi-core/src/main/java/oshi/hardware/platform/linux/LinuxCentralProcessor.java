@@ -148,6 +148,11 @@ final class LinuxCentralProcessor extends AbstractCentralProcessor {
     }
 
     @Override
+    protected float queryUtilization() {
+        return 0;
+    }
+
+    @Override
     protected List<LogicalProcessor> initProcessorCounts() {
         Map<Integer, Integer> numaNodeMap = mapNumaNodes();
         List<String> procCpu = FileUtil.readFile(CPUINFO);

@@ -212,7 +212,7 @@
             </AnchorPane>
             <AnchorPane layoutX="426.0" layoutY="163.0" minHeight="-Infinity" prefHeight="430.0" prefWidth="730.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: white;">
                <children>
-                      <LineChart fx:id="UtilizationGraph" layoutX="-54.0" layoutY="54.0" title="CPU Utilization" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <LineChart fx:id="UtilizationGraph" animated="false" layoutX="-54.0" layoutY="54.0" title="CPU Utilization" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <xAxis>
                               <CategoryAxis fx:id="Time" animated="false" label="Time" />
                           </xAxis>

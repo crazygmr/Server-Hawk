@@ -121,7 +121,7 @@ public class CPUController implements Initializable {
         systemName.setText("System Name: " + getSystemName(os));
         cpu_Base_Clock_Speed.setText(FormatUtil.formatValue(hal.getProcessor().getMaxFreq(), "hz"));
 
-        cpu_Util.setText(String.format("%.1f%%", cpuData(hal.getProcessor()) * 100));
+        cpu_Util.setText(String.format("%.1f%%", hal.getProcessor().getUtilization()));
 
         cpuAverageFreq(hal.getProcessor());
 
@@ -154,10 +154,10 @@ public class CPUController implements Initializable {
                         cpu_Temperature.setText(String.format("%.1f C", hal.getSensors().getCpuTemperature()));
                         cpu_Voltage.setText(String.valueOf(hal.getSensors().getCpuVoltage()));
 
-                        cpu_Util.setText(String.format("%.2f%%", cpuData(processor) * 100));
+                        cpu_Util.setText(String.format("%.2f%%", processor.getUtilization()));
 
                         Date currentTime = new Date();
-                        series.getData().add(new XYChart.Data<>(simpleDateFormat.format(currentTime), (hal.getSensors().getCpuTemperature())));
+                        series.getData().add(new XYChart.Data<>(simpleDateFormat.format(currentTime), processor.getUtilization()));
 
                         if (series.getData().size() > 15) {
                             series.getData().remove(0);

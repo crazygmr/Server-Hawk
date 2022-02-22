@@ -26,6 +26,12 @@ package oshi.hardware.common;
 import oshi.annotation.concurrent.Immutable;
 import oshi.hardware.GraphicsCard;
 
+import java.util.function.Supplier;
+import static oshi.util.Memoizer.defaultExpiration;
+import static oshi.util.Memoizer.memoize;
+
+
+
 /**
  * An abstract Sound Card
  */
@@ -37,6 +43,13 @@ public abstract class AbstractGraphicsCard implements GraphicsCard {
     private final String vendor;
     private final String versionInfo;
     private long vram;
+
+    private final Supplier<Float> maxFreq = memoize(this::queryMaxFreq, defaultExpiration());
+    private final Supplier<Float> currentFreq = memoize(this::queryCurrentFreq, defaultExpiration());
+    private final Supplier<Float> temperature = memoize(this::queryTemperature, defaultExpiration());
+    private final Supplier<Float> utilization = memoize(this::queryUtilization, defaultExpiration());
+    private final Supplier<Float> freeMem = memoize(this::queryFreeMem, defaultExpiration());
+    private final Supplier<Float> usedMem = memoize(this::queryUsedMem, defaultExpiration());
 
     /**
      * Constructor for AbstractGraphicsCard
@@ -86,6 +99,38 @@ public abstract class AbstractGraphicsCard implements GraphicsCard {
     }
 
     @Override
+    public float getMaxFreq() { return maxFreq.get(); }
+
+    protected abstract float queryMaxFreq();
+
+    @Override
+    public float getCurrentFreq(){
+        return currentFreq.get();
+    }
+
+    protected abstract float queryCurrentFreq();
+
+    @Override
+    public float getTemp() { return temperature.get(); }
+
+    protected abstract float queryTemperature();
+
+    @Override
+    public float getUtil() { return utilization.get(); }
+
+    protected abstract float queryUtilization();
+
+    @Override
+    public float getFreeMem() { return freeMem.get(); }
+
+    protected abstract float queryFreeMem();
+
+    @Override
+    public float getUsedMem() { return usedMem.get(); }
+
+    protected abstract float queryUsedMem();
+
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("GraphicsCard@");
@@ -100,7 +145,16 @@ public abstract class AbstractGraphicsCard implements GraphicsCard {
         builder.append(this.vram);
         builder.append(", versionInfo=[");
         builder.append(this.versionInfo);
-        builder.append("]]");
+        builder.append("]");
+        builder.append(", maxFrequency=");
+        builder.append(this.maxFreq.get());
+        builder.append(", Current Frequency=");
+        builder.append(this.currentFreq.get());
+        builder.append(", Current Temperature=");
+        builder.append(this.temperature.get());
+        builder.append(", Current Utilization=");
+        builder.append(this.utilization.get());
+        builder.append("]");
         return builder.toString();
     }
 }

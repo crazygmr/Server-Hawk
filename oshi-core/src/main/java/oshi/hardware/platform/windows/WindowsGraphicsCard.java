@@ -25,11 +25,17 @@ package oshi.hardware.platform.windows;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import com.sun.jna.platform.win32.COM.COMException;
 import com.sun.jna.platform.win32.VersionHelpers; // NOSONAR squid:S1191
 import com.sun.jna.platform.win32.COM.WbemcliUtil.WmiResult;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import oshi.annotation.concurrent.Immutable;
+import oshi.driver.windows.wmi.OhmHardware;
+import oshi.driver.windows.wmi.OhmSensor;
 import oshi.driver.windows.wmi.Win32VideoController;
 import oshi.driver.windows.wmi.Win32VideoController.VideoControllerProperty;
 import oshi.hardware.GraphicsCard;
@@ -37,6 +43,7 @@ import oshi.hardware.common.AbstractGraphicsCard;
 import oshi.util.Constants;
 import oshi.util.ParseUtil;
 import oshi.util.Util;
+import oshi.util.platform.windows.WmiQueryHandler;
 import oshi.util.platform.windows.WmiUtil;
 import oshi.util.tuples.Triplet;
 
@@ -45,6 +52,10 @@ import oshi.util.tuples.Triplet;
  */
 @Immutable
 final class WindowsGraphicsCard extends AbstractGraphicsCard {
+
+    private static final Logger LOG = LoggerFactory.getLogger(WindowsGraphicsCard.class);
+
+    private static final String COM_EXCEPTION_MSG = "COM exception: {}";
 
     private static final boolean IS_VISTA_OR_GREATER = VersionHelpers.IsWindowsVistaOrGreater();
 
@@ -92,9 +103,7 @@ final class WindowsGraphicsCard extends AbstractGraphicsCard {
                     }
                 }
                 String versionInfo = WmiUtil.getString(cards, VideoControllerProperty.DRIVERVERSION, index);
-                if (!Util.isBlank(versionInfo)) {
-                    versionInfo = "DriverVersion=" + versionInfo;
-                } else {
+                if (Util.isBlank(versionInfo)) {
                     versionInfo = Constants.UNKNOWN;
                 }
                 long vram = WmiUtil.getUint32asLong(cards, VideoControllerProperty.ADAPTERRAM, index);
@@ -103,5 +112,263 @@ final class WindowsGraphicsCard extends AbstractGraphicsCard {
             }
         }
         return cardList;
+    }
+
+    @Override
+    public float queryMaxFreq() {
+        return getMaxFreqFromOHM();
+    }
+
+    public static float getMaxFreqFromOHM() {
+        WmiQueryHandler h = Objects.requireNonNull(WmiQueryHandler.createInstance());
+        boolean comInit = false;
+        try {
+            comInit = h.initCOM();
+            //WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "Gpuati");
+            WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "GpuNvidia");
+            if (ohmHardware.getResultCount() > 0) {
+                LOG.debug("Found Clock speed data in Open Hardware Monitor");
+                // Look for identifier containing "gpu"
+                String gpuIdentifier = null;
+                for (int i = 0; i < ohmHardware.getResultCount(); i++) {
+                    String id = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, i);
+                    if (id.toLowerCase().contains("gpu")) {
+                        gpuIdentifier = id;
+                        break;
+                    }
+                }
+                // If none found, just get the first one
+                if (gpuIdentifier == null) {
+                    gpuIdentifier = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, 1);
+                }
+                // Now fetch sensor
+                WmiResult<OhmSensor.ValueProperty> ohmSensors = OhmSensor.querySensorValue(h, gpuIdentifier, "Clock");
+                if (ohmSensors.getResultCount() > 0) {
+                    return WmiUtil.getFloat(ohmSensors, OhmSensor.ValueProperty.MAX, 0);
+                }
+            }
+        } catch (COMException e) {
+            LOG.warn(COM_EXCEPTION_MSG, e.getMessage());
+        } finally {
+            if (comInit) {
+                h.unInitCOM();
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public float queryCurrentFreq() {
+        return getCurrentFreqFromOHM();
+    }
+
+    public static float getCurrentFreqFromOHM() {
+        WmiQueryHandler h = Objects.requireNonNull(WmiQueryHandler.createInstance());
+        boolean comInit = false;
+        try {
+            comInit = h.initCOM();
+            //WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "Gpuati");
+            WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "GpuNvidia");
+            if (ohmHardware.getResultCount() > 0) {
+                LOG.debug("Found Clock speed data in Open Hardware Monitor");
+                // Look for identifier containing "gpu"
+                String gpuIdentifier = null;
+                for (int i = 0; i < ohmHardware.getResultCount(); i++) {
+                    String id = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, i);
+                    if (id.toLowerCase().contains("gpu")) {
+                        gpuIdentifier = id;
+                        break;
+                    }
+                }
+                // If none found, just get the first one
+                if (gpuIdentifier == null) {
+                    gpuIdentifier = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, 1);
+                }
+                // Now fetch sensor
+                WmiResult<OhmSensor.ValueProperty> ohmSensors = OhmSensor.querySensorValue(h, gpuIdentifier, "Clock");
+                if (ohmSensors.getResultCount() > 0) {
+                    return WmiUtil.getFloat(ohmSensors, OhmSensor.ValueProperty.VALUE, 0);
+                }
+            }
+        } catch (COMException e) {
+            LOG.warn(COM_EXCEPTION_MSG, e.getMessage());
+        } finally {
+            if (comInit) {
+                h.unInitCOM();
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public float queryTemperature() {
+        return getTempFromOHM();
+    }
+
+    public static float getTempFromOHM() {
+        WmiQueryHandler h = Objects.requireNonNull(WmiQueryHandler.createInstance());
+        boolean comInit = false;
+        try {
+            comInit = h.initCOM();
+            //WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "Gpuati");
+            WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "GpuNvidia");
+            if (ohmHardware.getResultCount() > 0) {
+                LOG.debug("Found Temperature data in Open Hardware Monitor");
+                // Look for identifier containing "gpu"
+                String gpuIdentifier = null;
+                for (int i = 0; i < ohmHardware.getResultCount(); i++) {
+                    String id = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, i);
+                    if (id.toLowerCase().contains("gpu")) {
+                        gpuIdentifier = id;
+                        break;
+                    }
+                }
+                // If none found, just get the first one
+                if (gpuIdentifier == null) {
+                    gpuIdentifier = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, 1);
+                }
+                // Now fetch sensor
+                WmiResult<OhmSensor.ValueProperty> ohmSensors = OhmSensor.querySensorValue(h, gpuIdentifier, "Temperature");
+                if (ohmSensors.getResultCount() > 0) {
+                    return WmiUtil.getFloat(ohmSensors, OhmSensor.ValueProperty.VALUE, 0);
+                }
+            }
+        } catch (COMException e) {
+            LOG.warn(COM_EXCEPTION_MSG, e.getMessage());
+        } finally {
+            if (comInit) {
+                h.unInitCOM();
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public float queryUtilization() {
+        return getUtilizationFromOHM();
+    }
+
+    public static float getUtilizationFromOHM() {
+        WmiQueryHandler h = Objects.requireNonNull(WmiQueryHandler.createInstance());
+        boolean comInit = false;
+        try {
+            comInit = h.initCOM();
+            //WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "Gpuati");
+            WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "GpuNvidia");
+            if (ohmHardware.getResultCount() > 0) {
+                LOG.debug("Found Utilization data in Open Hardware Monitor");
+                // Look for identifier containing "gpu"
+                String gpuIdentifier = null;
+                for (int i = 0; i < ohmHardware.getResultCount(); i++) {
+                    String id = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, i);
+                    if (id.toLowerCase().contains("gpu")) {
+                        gpuIdentifier = id;
+                        break;
+                    }
+                }
+                // If none found, just get the first one
+                if (gpuIdentifier == null) {
+                    gpuIdentifier = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, 1);
+                }
+                // Now fetch sensor
+                WmiResult<OhmSensor.ValueProperty> ohmSensors = OhmSensor.querySensorValue(h, gpuIdentifier, "Load");
+                if (ohmSensors.getResultCount() > 0) {
+                    return WmiUtil.getFloat(ohmSensors, OhmSensor.ValueProperty.VALUE, 1);
+                }
+            }
+        } catch (COMException e) {
+            LOG.warn(COM_EXCEPTION_MSG, e.getMessage());
+        } finally {
+            if (comInit) {
+                h.unInitCOM();
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public float queryFreeMem() {
+        return getFreeMemFromOHM();
+    }
+
+    public static float getFreeMemFromOHM() {
+        WmiQueryHandler h = Objects.requireNonNull(WmiQueryHandler.createInstance());
+        boolean comInit = false;
+        try {
+            comInit = h.initCOM();
+            //WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "Gpuati");
+            WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "GpuNvidia");
+            if (ohmHardware.getResultCount() > 0) {
+                LOG.debug("Found Utilization data in Open Hardware Monitor");
+                // Look for identifier containing "gpu"
+                String gpuIdentifier = null;
+                for (int i = 0; i < ohmHardware.getResultCount(); i++) {
+                    String id = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, i);
+                    if (id.toLowerCase().contains("gpu")) {
+                        gpuIdentifier = id;
+                        break;
+                    }
+                }
+                // If none found, just get the first one
+                if (gpuIdentifier == null) {
+                    gpuIdentifier = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, 1);
+                }
+                // Now fetch sensor
+                WmiResult<OhmSensor.ValueProperty> ohmSensors = OhmSensor.querySensorValue(h, gpuIdentifier, "SmallData");
+                if (ohmSensors.getResultCount() > 0) {
+                    return WmiUtil.getFloat(ohmSensors, OhmSensor.ValueProperty.VALUE,1);
+                }
+            }
+        } catch (COMException e) {
+            LOG.warn(COM_EXCEPTION_MSG, e.getMessage());
+        } finally {
+            if (comInit) {
+                h.unInitCOM();
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public float queryUsedMem() {
+        return getUsedMemFromOHM();
+    }
+
+    public static float getUsedMemFromOHM() {
+        WmiQueryHandler h = Objects.requireNonNull(WmiQueryHandler.createInstance());
+        boolean comInit = false;
+        try {
+            comInit = h.initCOM();
+            //WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "Gpuati");
+            WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "GpuNvidia");
+            if (ohmHardware.getResultCount() > 0) {
+                LOG.debug("Found Utilization data in Open Hardware Monitor");
+                // Look for identifier containing "gpu"
+                String gpuIdentifier = null;
+                for (int i = 0; i < ohmHardware.getResultCount(); i++) {
+                    String id = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, i);
+                    if (id.toLowerCase().contains("gpu")) {
+                        gpuIdentifier = id;
+                        break;
+                    }
+                }
+                // If none found, just get the first one
+                if (gpuIdentifier == null) {
+                    gpuIdentifier = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, 1);
+                }
+                // Now fetch sensor
+                WmiResult<OhmSensor.ValueProperty> ohmSensors = OhmSensor.querySensorValue(h, gpuIdentifier, "SmallData");
+                if (ohmSensors.getResultCount() > 0) {
+                    return WmiUtil.getFloat(ohmSensors, OhmSensor.ValueProperty.VALUE,2);
+                }
+            }
+        } catch (COMException e) {
+            LOG.warn(COM_EXCEPTION_MSG, e.getMessage());
+        } finally {
+            if (comInit) {
+                h.unInitCOM();
+            }
+        }
+        return 0;
     }
 }

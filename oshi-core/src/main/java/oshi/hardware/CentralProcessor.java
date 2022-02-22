@@ -249,6 +249,9 @@ public interface CentralProcessor {
      * Index of CPU tick counters in the {@link #getSystemCpuLoadTicks()} and
      * {@link #getProcessorCpuLoadTicks()} arrays.
      */
+
+    float getUtilization();
+
     enum TickType {
         /**
          * CPU utilization that occurred while executing at the user level
@@ -301,6 +304,7 @@ public interface CentralProcessor {
         public int getIndex() {
             return index;
         }
+
     }
 
     /**

@@ -30,12 +30,14 @@ import java.util.function.Supplier;
 import com.sun.jna.Platform; // NOSONAR squid:S1191
 
 import oshi.hardware.HardwareAbstractionLayer;
+/*
 import oshi.hardware.platform.linux.LinuxHardwareAbstractionLayer;
 import oshi.hardware.platform.mac.MacHardwareAbstractionLayer;
 import oshi.hardware.platform.unix.aix.AixHardwareAbstractionLayer;
 import oshi.hardware.platform.unix.freebsd.FreeBsdHardwareAbstractionLayer;
 import oshi.hardware.platform.unix.openbsd.OpenBsdHardwareAbstractionLayer;
 import oshi.hardware.platform.unix.solaris.SolarisHardwareAbstractionLayer;
+*/
 import oshi.hardware.platform.windows.WindowsHardwareAbstractionLayer;
 import oshi.software.os.OperatingSystem;
 import oshi.software.os.linux.LinuxOperatingSystem;
@@ -133,7 +135,7 @@ public class SystemInfo {
         switch (CURRENT_PLATFORM) {
         case WINDOWS:
             return new WindowsHardwareAbstractionLayer();
-        case LINUX:
+        /*case LINUX:
             return new LinuxHardwareAbstractionLayer();
         case MACOS:
             return new MacHardwareAbstractionLayer();
@@ -144,7 +146,7 @@ public class SystemInfo {
         case AIX:
             return new AixHardwareAbstractionLayer();
         case OPENBSD:
-            return new OpenBsdHardwareAbstractionLayer();
+            return new OpenBsdHardwareAbstractionLayer();*/
         default:
             throw new UnsupportedOperationException(NOT_SUPPORTED + CURRENT_PLATFORM.getName());
         }

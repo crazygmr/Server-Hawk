@@ -106,6 +106,11 @@ final class FreeBsdCentralProcessor extends AbstractCentralProcessor {
     }
 
     @Override
+    protected float queryUtilization() {
+        return 0;
+    }
+
+    @Override
     protected List<LogicalProcessor> initProcessorCounts() {
         List<LogicalProcessor> logProcs = parseTopology();
         // Force at least one processor

@@ -42,7 +42,7 @@ public final class OhmSensor {
      * Sensor value property
      */
     public enum ValueProperty {
-        VALUE;
+        VALUE, MAX;
     }
 
     private OhmSensor() {

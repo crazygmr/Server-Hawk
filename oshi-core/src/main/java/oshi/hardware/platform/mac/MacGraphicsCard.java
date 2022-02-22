@@ -101,4 +101,39 @@ final class MacGraphicsCard extends AbstractGraphicsCard {
                 versionInfoList.isEmpty() ? Constants.UNKNOWN : String.join(", ", versionInfoList), vram));
         return cardList;
     }
+
+    @Override
+    public float getCurrentFreq() {
+        return 0;
+    }
+
+    @Override
+    protected float queryCurrentFreq() {
+        return 0;
+    }
+
+    @Override
+    protected float queryTemperature() {
+        return 0;
+    }
+
+    @Override
+    protected float queryUtilization() {
+        return 0;
+    }
+
+    @Override
+    protected float queryFreeMem() {
+        return 0;
+    }
+
+    @Override
+    protected float queryUsedMem() {
+        return 0;
+    }
+
+    @Override
+    protected float queryMaxFreq() {
+        return 0;
+    }
 }

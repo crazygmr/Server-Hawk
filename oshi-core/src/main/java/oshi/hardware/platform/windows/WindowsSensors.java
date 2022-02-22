@@ -203,7 +203,7 @@ final class WindowsSensors extends AbstractSensors {
         boolean comInit = false;
         try {
             comInit = h.initCOM();
-            WmiResult<IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Sensor", "Voltage");
+            WmiResult<IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "CPU");
             if (ohmHardware.getResultCount() > 0) {
                 LOG.debug("Found Voltage data in Open Hardware Monitor");
                 // Look for identifier containing "cpu"
@@ -220,7 +220,7 @@ final class WindowsSensors extends AbstractSensors {
                     cpuIdentifier = WmiUtil.getString(ohmHardware, IdentifierProperty.IDENTIFIER, 0);
                 }
                 // Now fetch sensor
-                WmiResult<ValueProperty> ohmSensors = OhmSensor.querySensorValue(h, cpuIdentifier, "Voltage");
+                WmiResult<ValueProperty> ohmSensors = OhmSensor.querySensorValue(h, cpuIdentifier, "Powers");
                 if (ohmSensors.getResultCount() > 0) {
                     return WmiUtil.getFloat(ohmSensors, ValueProperty.VALUE, 0);
                 }

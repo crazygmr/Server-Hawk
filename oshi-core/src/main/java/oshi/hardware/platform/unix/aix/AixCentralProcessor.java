@@ -110,6 +110,11 @@ final class AixCentralProcessor extends AbstractCentralProcessor {
     }
 
     @Override
+    protected float queryUtilization() {
+        return 0;
+    }
+
+    @Override
     protected List<LogicalProcessor> initProcessorCounts() {
         this.config = PerfstatConfig.queryConfig();
 

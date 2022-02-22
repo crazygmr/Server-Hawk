@@ -58,6 +58,12 @@ public abstract class AbstractCentralProcessor implements CentralProcessor {
     private final Supplier<long[][]> processorCpuLoadTicks = memoize(this::queryProcessorCpuLoadTicks,
             defaultExpiration());
 
+    //-----------------------------------------------------------------------------------------------------------------
+
+    private final Supplier<Float> utilization = memoize(this::queryUtilization, defaultExpiration());
+
+    //-----------------------------------------------------------------------------------------------------------------
+
     // Logical and Physical Processor Counts
     private final int physicalPackageCount;
     private final int physicalProcessorCount;
@@ -108,6 +114,23 @@ public abstract class AbstractCentralProcessor implements CentralProcessor {
     public long getMaxFreq() {
         return maxFreq.get();
     }
+
+    /******************************************************************************************************************
+     *
+     *                      Start of new code added by Joel Trejo
+     *
+     ******************************************************************************************************************/
+
+    protected abstract float queryUtilization();
+
+    @Override
+    public float getUtilization() { return utilization.get(); }
+
+    /******************************************************************************************************************
+     *
+     *                      End of new code added by Joel Trejo
+     *
+     ******************************************************************************************************************/
 
     /**
      * Get processor max frequency.

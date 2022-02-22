@@ -96,6 +96,11 @@ public class OpenBsdCentralProcessor extends AbstractCentralProcessor {
                 cpuFreq);
     }
 
+    @Override
+    protected float queryUtilization() {
+        return 0;
+    }
+
     private static Triplet<Integer, Integer, Integer> cpuidToFamilyModelStepping(int cpuid) {
         // family is bits 27:20 | 11:8
         int family = cpuid >> 16 & 0xff0 | cpuid >> 8 & 0xf;

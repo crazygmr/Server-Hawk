@@ -123,6 +123,11 @@ final class MacCentralProcessor extends AbstractCentralProcessor {
     }
 
     @Override
+    protected float queryUtilization() {
+        return 0;
+    }
+
+    @Override
     protected List<LogicalProcessor> initProcessorCounts() {
         int logicalProcessorCount = SysctlUtil.sysctl("hw.logicalcpu", 1);
         int physicalProcessorCount = SysctlUtil.sysctl("hw.physicalcpu", 1);
