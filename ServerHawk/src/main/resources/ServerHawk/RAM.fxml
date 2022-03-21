@@ -37,12 +37,14 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                           <children>
-                              <Label text="Utilization">
+                              <Label text="Memory Swap Total" GridPane.rowIndex="10">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -58,7 +60,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Paged Memory" GridPane.rowIndex="4">
+                              <Label text="Memory Frequency" GridPane.rowIndex="2">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -66,7 +68,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Non-Paged Memory" GridPane.rowIndex="5">
+                              <Label text="Total Memory" GridPane.rowIndex="4">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -74,7 +76,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Slots Used" GridPane.rowIndex="6">
+                              <Label text="Slots Used">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -82,7 +84,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Voltage" GridPane.rowIndex="2">
+                              <Label text="Swap Pages In" GridPane.rowIndex="7">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -98,7 +100,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Compressed Memory" GridPane.rowIndex="7">
+                              <Label text="Memory Swap Used" GridPane.rowIndex="9">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -106,7 +108,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Available Memory" GridPane.rowIndex="8">
+                              <Label text="Available Memory" GridPane.rowIndex="5">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -114,7 +116,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ram_Utilization" layoutX="10.0" layoutY="22.0" text="&lt;Utilization&gt;" GridPane.columnIndex="1">
+                        <Label fx:id="ram_Swap_Total" layoutX="10.0" layoutY="22.0" text="&lt;Memory Swap Total&gt;" GridPane.columnIndex="1" GridPane.rowIndex="10">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -130,7 +132,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ram_Voltage" layoutX="10.0" layoutY="109.0" text="&lt;Voltage&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="ram_Swap_In" layoutX="10.0" layoutY="109.0" text="&lt;Swap Pages Used&gt;" GridPane.columnIndex="1" GridPane.rowIndex="7">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -146,7 +148,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ram_Paged_Memory" layoutX="10.0" layoutY="195.0" text="&lt;Paged Memory&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Label fx:id="ram_Frequency" layoutX="10.0" layoutY="195.0" text="&lt;Memory Frequency&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -154,7 +156,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ram_Non_Paged_Memory" layoutX="10.0" layoutY="238.0" text="&lt;Non-Paged Mem&gt;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Label fx:id="ram_Total_Memory" layoutX="10.0" layoutY="238.0" text="&lt;Total Memory&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -162,7 +164,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ram_Slots_Used" layoutX="10.0" layoutY="281.0" text="&lt;Slots Used&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <Label fx:id="ram_Slots_Used" layoutX="10.0" layoutY="281.0" text="&lt;Slots Used&gt;" GridPane.columnIndex="1">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -170,7 +172,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ram_Compressed_Memory" layoutX="10.0" layoutY="324.0" text="&lt;Compressed Mem&gt;" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <Label fx:id="ram_Swap_Used" layoutX="10.0" layoutY="324.0" text="&lt;Memoy Swap Used&gt;" GridPane.columnIndex="1" GridPane.rowIndex="9">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -178,7 +180,39 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ram_Available_Memory" layoutX="10.0" layoutY="367.0" text="&lt;Available Memory&gt;" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                        <Label fx:id="ram_Available_Memory" layoutX="10.0" layoutY="367.0" text="&lt;Available Memory&gt;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="254.0" text="Swap Pages Out" GridPane.rowIndex="8">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Swap_Out" layoutX="177.0" layoutY="254.0" text="&lt;Swap Pages Used&gt;" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="196.0" text="Page Size" GridPane.rowIndex="6">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ram_Page_Size" layoutX="177.0" layoutY="196.0" text="&lt;Page Size&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -192,12 +226,12 @@
             </AnchorPane>
             <AnchorPane layoutX="426.0" layoutY="163.0" prefHeight="430.0" prefWidth="730.0">
                <children>
-                      <LineChart fx:id="UtilizationGraph" layoutX="426.0" layoutY="163.0" legendVisible="false" prefHeight="509.0" prefWidth="635.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" title="RAM Utilization" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <LineChart fx:id="ramUtilizationGraph" animated="false" layoutX="426.0" layoutY="163.0" prefHeight="509.0" prefWidth="635.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;" title="RAM Memory Used" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <xAxis>
-                              <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
+                              <CategoryAxis fx:id="Time" animated="false" label="Time" />
                           </xAxis>
                           <yAxis>
-                              <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
+                              <NumberAxis fx:id="totalUtilization" animated="false" label="Memory Used" side="LEFT" />
                           </yAxis>
                       </LineChart>
                </children>
@@ -226,7 +260,7 @@
                         <Insets left="25.0" right="10.0" />
                     </padding>
                 </Label>
-                <Label prefHeight="28.0" prefWidth="273.0" text="&lt;System Name&gt;" GridPane.columnIndex="1">
+                <Label fx:id="systemName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;System Name&gt;" GridPane.columnIndex="1">
                     <font>
                         <Font name="Times New Roman" size="24.0" />
                     </font>

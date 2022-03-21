@@ -354,7 +354,7 @@ final class WindowsCentralProcessor extends AbstractCentralProcessor {
             WmiResult<OhmHardware.IdentifierProperty> ohmHardware = OhmHardware.queryHwIdentifier(h, "Hardware", "CPU");
             if (ohmHardware.getResultCount() > 0) {
                 LOG.debug("Found Utilization data in Open Hardware Monitor");
-                // Look for identifier containing "gpu"
+                // Look for identifier containing "cpu"
                 String cpuIdentifier = null;
                 for (int i = 0; i < ohmHardware.getResultCount(); i++) {
                     String id = WmiUtil.getString(ohmHardware, OhmHardware.IdentifierProperty.IDENTIFIER, i);

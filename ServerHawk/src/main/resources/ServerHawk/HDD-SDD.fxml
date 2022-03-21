@@ -23,7 +23,7 @@
                         <Font name="Times New Roman" size="24.0" />
                     </font>
                 </Label>
-            <Label fx:id="disk_Make_Model" layoutX="42.0" layoutY="147.0" prefHeight="34.0" prefWidth="185.0" text="&lt;Disk Make/Model&gt;">
+            <Label fx:id="disk_Make_Model" layoutX="41.0" layoutY="129.0" prefHeight="34.0" prefWidth="1115.0" text="&lt;Disk Make/Model&gt;">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
@@ -53,20 +53,12 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Active Time" GridPane.rowIndex="2">
+                              <Label text="Active Time" GridPane.rowIndex="3">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
                            <font>
                               <Font name="Times New Roman" size="18.0" />
-                           </font>
-                        </Label>
-                              <Label text="Average Response Time" GridPane.rowIndex="3">
-                           <padding>
-                              <Insets left="3.0" />
-                           </padding>
-                           <font>
-                              <Font name="Times New Roman" size="14.0" />
                            </font>
                         </Label>
                               <Label text="Read/Write Speed" GridPane.rowIndex="4">
@@ -77,7 +69,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Capacity/Formatted" GridPane.rowIndex="5">
+                              <Label text="Reads" GridPane.rowIndex="5">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -85,7 +77,15 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Disk Type" GridPane.rowIndex="6">
+                              <Label text="Capacity/Formatted" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="18.0" />
+                           </font>
+                        </Label>
+                              <Label text="Writes" GridPane.rowIndex="6">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -117,7 +117,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="disk_Active_Time" layoutX="10.0" layoutY="140.0" text="&lt;Active Time&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="disk_Active_Time" layoutX="10.0" layoutY="140.0" text="&lt;Active Time&gt;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -125,15 +125,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="disk_Average_Response_Time" layoutX="10.0" layoutY="198.0" text="&lt;Average Response Time&gt;" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <padding>
-                              <Insets left="3.0" />
-                           </padding>
-                           <font>
-                              <Font name="Times New Roman" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="disk_Read_Write_Speed" layoutX="10.0" layoutY="251.0" text="&lt;Read/Write Speed&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Label fx:id="disk_Read_Write_Speed" layoutX="10.0" layoutY="198.0" text="&lt;Read/Write Speed&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -141,7 +133,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="disk_Capacity_Formatted" layoutX="10.0" layoutY="306.0" text="&lt;Capacity/Formatted&gt;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Label fx:id="disk_Reads" layoutX="10.0" layoutY="251.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Reads&gt;" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -149,7 +141,15 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="disk_Type" layoutX="10.0" layoutY="361.0" text="&lt;Disk Type&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <Label fx:id="disk_Capacity_Formatted" layoutX="10.0" layoutY="306.0" text="&lt;Capacity/Formatted&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets left="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="Times New Roman" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="disk_Writes" layoutX="10.0" layoutY="361.0" text="&lt;Writes&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
