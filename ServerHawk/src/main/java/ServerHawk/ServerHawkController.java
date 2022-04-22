@@ -91,13 +91,21 @@ public class ServerHawkController implements Initializable {
 
         processorInfo.setText(hal.getProcessor().toString());
 
-        //
-        // hardwareInfo.setText(String.valueOf(hal.getComputerSystem()));
+
+        hardwareInfo.setText("Manufacturer = " + String.valueOf(hal.getComputerSystem().getManufacturer()) + ", \n\n" +
+                             "Model = " + String.valueOf(hal.getComputerSystem().getModel()) + ", \n\n" +
+                             "Serial Number = " + String.valueOf(hal.getComputerSystem().getSerialNumber()) + ", \n\n" +
+                             "UUID = " + String.valueOf(hal.getComputerSystem().getHardwareUUID()));
 
 /*        try {
             hardwareInfo.setText(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(hal.getComputerSystem()));
         } catch (JsonProcessingException e) {
             e.getMessage();
+
+             sb.append("manufacturer=").append(getManufacturer()).append(", ");
+        sb.append("model=").append(getModel()).append(", ");
+        sb.append("serial number=").append(getSerialNumber()).append(", ");
+        sb.append("uuid=").append(getHardwareUUID());
         }*/
     }
 

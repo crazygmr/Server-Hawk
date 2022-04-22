@@ -38,9 +38,6 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                           <children>
                               <Label text="Utilization">
@@ -102,30 +99,6 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="L1 Cache" GridPane.rowIndex="7">
-                           <padding>
-                              <Insets left="3.0" />
-                           </padding>
-                           <font>
-                              <Font name="Times New Roman" size="18.0" />
-                           </font>
-                        </Label>
-                              <Label text="L2 Cache" GridPane.rowIndex="8">
-                           <padding>
-                              <Insets left="3.0" />
-                           </padding>
-                           <font>
-                              <Font name="Times New Roman" size="18.0" />
-                           </font>
-                        </Label>
-                              <Label text="L3 Cache" GridPane.rowIndex="9">
-                           <padding>
-                              <Insets left="3.0" />
-                           </padding>
-                           <font>
-                              <Font name="Times New Roman" size="18.0" />
-                           </font>
-                        </Label>
                         <Label fx:id="cpu_Util" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Utilization %&gt;" GridPane.columnIndex="1">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
@@ -175,30 +148,6 @@
                            </padding>
                         </Label>
                         <Label fx:id="cpu_Voltage" layoutX="177.0" layoutY="205.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Voltage&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                           <font>
-                              <Font name="Times New Roman" size="18.0" />
-                           </font>
-                           <padding>
-                              <Insets left="3.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="cpu_L1_Cache" layoutX="177.0" layoutY="205.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;L1 Cache&gt;" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                           <font>
-                              <Font name="Times New Roman" size="18.0" />
-                           </font>
-                           <padding>
-                              <Insets left="3.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="cpu_L2_Cache" layoutX="177.0" layoutY="205.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;L2 Cache&gt;" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                           <font>
-                              <Font name="Times New Roman" size="18.0" />
-                           </font>
-                           <padding>
-                              <Insets left="3.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="cpu_L3_Cache" layoutX="177.0" layoutY="283.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;L3 Cache&gt;" GridPane.columnIndex="1" GridPane.rowIndex="9">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>

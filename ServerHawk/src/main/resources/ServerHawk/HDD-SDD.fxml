@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -61,7 +59,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Read/Write Speed" GridPane.rowIndex="4">
+                              <Label text="Reads/Writes" GridPane.rowIndex="4">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -69,7 +67,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Reads" GridPane.rowIndex="5">
+                              <Label text="Read Amount" GridPane.rowIndex="5">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -77,7 +75,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Capacity/Formatted" GridPane.rowIndex="2">
+                              <Label text="Available/Total" GridPane.rowIndex="2">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -85,7 +83,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                              <Label text="Writes" GridPane.rowIndex="6">
+                              <Label text="Write Amount" GridPane.rowIndex="6">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -125,7 +123,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="disk_Read_Write_Speed" layoutX="10.0" layoutY="198.0" text="&lt;Read/Write Speed&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Label fx:id="disk_Read_Write_Speed" layoutX="10.0" layoutY="198.0" text="&lt;Reads/Writes&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -133,7 +131,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="disk_Reads" layoutX="10.0" layoutY="251.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Reads&gt;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Label fx:id="disk_Reads" layoutX="10.0" layoutY="251.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Read Amount&gt;" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -141,7 +139,7 @@
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="disk_Capacity_Formatted" layoutX="10.0" layoutY="306.0" text="&lt;Capacity/Formatted&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="disk_Capacity_Formatted" layoutX="10.0" layoutY="306.0" text="&lt;Available/Toral&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -149,7 +147,7 @@
                               <Font name="Times New Roman" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="disk_Writes" layoutX="10.0" layoutY="361.0" text="&lt;Writes&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <Label fx:id="disk_Writes" layoutX="10.0" layoutY="361.0" text="&lt;Write Amount&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <padding>
                               <Insets left="3.0" />
                            </padding>
@@ -163,14 +161,7 @@
             </AnchorPane>
             <AnchorPane layoutX="426.0" layoutY="163.0" prefHeight="430.0" prefWidth="730.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3;">
                <children>
-                      <LineChart fx:id="UtilizationGraph" layoutX="-289.0" layoutY="-91.0" legendVisible="false" prefHeight="509.0" prefWidth="635.0" title="Active Time" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <xAxis>
-                              <CategoryAxis fx:id="Time" autoRanging="false" label="Time" />
-                          </xAxis>
-                          <yAxis>
-                              <NumberAxis fx:id="totalUtilization" autoRanging="false" label="Utilization %" side="LEFT" />
-                          </yAxis>
-                      </LineChart>
+                  <PieChart fx:id="storagePie" animated="false" layoutX="115.0" layoutY="15.0" title="Storage Composition" />
                </children>
             </AnchorPane>
             </children>
@@ -197,7 +188,7 @@
                         <Insets left="25.0" right="10.0" />
                     </padding>
                 </Label>
-                <Label prefHeight="28.0" prefWidth="273.0" text="&lt;System Name&gt;" GridPane.columnIndex="1">
+                <Label fx:id="systemName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;System Name&gt;" GridPane.columnIndex="1">
                     <font>
                         <Font name="Times New Roman" size="24.0" />
                     </font>

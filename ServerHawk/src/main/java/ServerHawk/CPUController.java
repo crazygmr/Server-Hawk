@@ -115,9 +115,6 @@ public class CPUController implements Initializable {
         HardwareAbstractionLayer hal = systemInfo.getHardware();
         oldTicks = new long[CentralProcessor.TickType.values().length];
 
-        /*long [] prevTicks = hal.getProcessor().getSystemCpuLoadTicks();
-        cpu_Util.setText(String.format("%.1f%%", hal.getProcessor().getSystemCpuLoadBetweenTicks(prevTicks) * 100));*/
-
         systemName.setText("System Name: " + getSystemName(os));
         cpu_Base_Clock_Speed.setText(FormatUtil.formatValue(hal.getProcessor().getMaxFreq(), "hz"));
 

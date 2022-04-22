@@ -1,6 +1,8 @@
 package ServerHawk;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,16 +10,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import oshi.SystemInfo;
 import oshi.hardware.HWDiskStore;
 import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.FileSystem;
+import oshi.software.os.OSFileStore;
+import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
 
@@ -30,14 +32,32 @@ public class StorageController implements Initializable {
     private Scene scene;
     private Parent root;
 
+    // Button that takes the user to the home screen
     @FXML
-    private CategoryAxis Time;
+    private Button homeSelect;
 
-    @FXML
-    private LineChart<?, ?> UtilizationGraph;
-
+    // Button that takes the user to the CPU page
     @FXML
     private Button cpuSelect;
+
+    // Button that takes the user to the GPU page
+    @FXML
+    private Button gpuSelect;
+
+    // Button that takes the user to the RAM page
+    @FXML
+    private Button ramSelect;
+
+    // Button that takes the user to the HDD/SDD page
+    @FXML
+    private Button storageSelect;
+
+    // Button the takes the user to the network page
+    @FXML
+    private Button networkSelect;
+
+    @FXML
+    private Label systemName;
 
     @FXML
     private Label disk_Active_Time;
@@ -64,22 +84,7 @@ public class StorageController implements Initializable {
     private Label disk_Writes;
 
     @FXML
-    private Button gpuSelect;
-
-    @FXML
-    private Button homeSelect;
-
-    @FXML
-    private Button networkSelect;
-
-    @FXML
-    private Button ramSelect;
-
-    @FXML
-    private Button storageSelect;
-
-    @FXML
-    private NumberAxis totalUtilization;
+    private PieChart storagePie;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -87,17 +92,25 @@ public class StorageController implements Initializable {
         HardwareAbstractionLayer hal = systemInfo.getHardware();
         OperatingSystem os = systemInfo.getOperatingSystem();
         List<HWDiskStore> hwDiskStore = hal.getDiskStores();
+        FileSystem files = os.getFileSystem();
+        List<OSFileStore> fileStore = files.getFileStores();
 
+        PieChart.Data slice1 = new PieChart.Data("Free Space", fileStore.get(0).getUsableSpace());
+        PieChart.Data slice2 = new PieChart.Data("Used Space"  , fileStore.get(0).getTotalSpace() - fileStore.get(0).getUsableSpace());
+
+        storagePie.getData().add(slice1);
+        storagePie.getData().add(slice2);
+
+
+        systemName.setText("System Name: " + getSystemName(os));
         disk_Make_Model.setText(hwDiskStore.get(0).getModel());
         disk_Number.setText(hwDiskStore.get(0).getPartitions().get(0).getIdentification());
         disk_Letter.setText(String.valueOf(hwDiskStore.get(0).getPartitions().get(0).getMountPoint()));
-        disk_Active_Time.setText(FormatUtil.formatElapsedSecs(hwDiskStore.get(0).getTransferTime()));
-        disk_Capacity_Formatted.setText(FormatUtil.formatBytes(hwDiskStore.get(0).getSize())+ " / " + FormatUtil.formatBytes(hwDiskStore.get(0).getPartitions().get(0).getSize()));
+        disk_Active_Time.setText(FormatUtil.formatElapsedSecs(hwDiskStore.get(0).getTransferTime() / 1000));
+        disk_Capacity_Formatted.setText(FormatUtil.formatBytes(fileStore.get(0).getUsableSpace())+ " / " + FormatUtil.formatBytes(fileStore.get(0).getTotalSpace()));
         disk_Reads.setText(FormatUtil.formatBytes(hwDiskStore.get(0).getReadBytes()));
         disk_Writes.setText(FormatUtil.formatBytes(hwDiskStore.get(0).getWriteBytes()));
-        disk_Read_Write_Speed.setText(FormatUtil.formatBytes(hwDiskStore.get(0).getReads()) + " / " + FormatUtil.formatBytes(hwDiskStore.get(0).getWrites()));
-        System.err.println((hwDiskStore.get(2).getPartitions().get(0).toString()));
-        System.err.println(hwDiskStore.get(1).toString());
+        disk_Read_Write_Speed.setText((hwDiskStore.get(0).getReads()) + " / " + (hwDiskStore.get(0).getWrites()));
 
         // A timer that serves to update the uptime label every second
         Timer ramTimer = new Timer();
@@ -107,10 +120,10 @@ public class StorageController implements Initializable {
                 Platform.runLater(new Runnable() {
                     public void run() {
                         hwDiskStore.get(0).updateAttributes();
-                        disk_Active_Time.setText(FormatUtil.formatElapsedSecs(hwDiskStore.get(0).getTransferTime()));
+                        disk_Active_Time.setText(FormatUtil.formatElapsedSecs(hwDiskStore.get(0).getTransferTime() / 1000));
                         disk_Reads.setText(FormatUtil.formatBytes(hwDiskStore.get(0).getReadBytes()));
                         disk_Writes.setText(FormatUtil.formatBytes(hwDiskStore.get(0).getWriteBytes()));
-                        disk_Read_Write_Speed.setText(FormatUtil.formatBytes(hwDiskStore.get(0).getReads()) + " / " + FormatUtil.formatBytes(hwDiskStore.get(0).getWrites()));
+                        disk_Read_Write_Speed.setText((hwDiskStore.get(0).getReads()) + " / " + (hwDiskStore.get(0).getWrites()));
 
                         /*Date currentTime = new Date();
                         series.getData().add(new XYChart.Data<>(simpleDateFormat.format(currentTime), (memory.getTotal() - memory.getAvailable())));
@@ -174,5 +187,15 @@ public class StorageController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public String getSystemName(OperatingSystem os) {
+        OSProcess process = os.getProcess(os.getProcessId());
+        for (Map.Entry<String, String> e : process.getEnvironmentVariables().entrySet()) {
+            if(e.getKey().equals("COMPUTERNAME")) {
+                return e.getValue();
+            }
+        }
+        return "DefaultValue";
     }
 }
